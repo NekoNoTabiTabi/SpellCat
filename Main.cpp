@@ -28,11 +28,11 @@ int main() {
     playerDeck.deck.push_back({ 5, "I", "Attack", "Use in words", 1 });
     playerDeck.deck.push_back({ 6, "K", "Attack", "Use in words", 1 });
     playerDeck.deck.push_back({ 7, "E", "Attack", "Use in words", 1 });
-    playerDeck.deck.push_back({ 8, "D", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 8, "O", "Defense", "Use in words", 1 });
     playerDeck.deck.push_back({ 9, "E", "Defense", "Use in words", 1 });
     playerDeck.deck.push_back({ 10, "F", "Defense", "Use in words", 1 });
-    playerDeck.deck.push_back({ 11, "E", "Defense", "Use in words", 1 });
-    playerDeck.deck.push_back({ 12, "N", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 11, "A", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 12, "U", "Defense", "Use in words", 1 });
     playerDeck.deck.push_back({ 13, "S", "Defense", "Use in words", 1 });
     playerDeck.deck.push_back({ 14, "E", "Defense", "Use in words", 1 });
     playerDeck.Shuffle();
