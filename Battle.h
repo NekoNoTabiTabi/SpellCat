@@ -11,7 +11,7 @@
 
     class Battle {
     public:
-        Battle(Player& p, Enemy& e, Deck& d, Dictionary& dict, GameState& gState);
+        Battle(Player& p, Enemy& e, Deck& d, Dictionary& dict, GameState& gState, int floorNumber);
 
 
         Battle(const Battle&) = delete;
@@ -38,7 +38,7 @@
         Hand hand;
         Dictionary& dict;
         GameState& gState;
-
+        int floorNumber;
         Rectangle confirmBtn = { 800, 500, 150, 50 };
         int handLimit = 8;
 

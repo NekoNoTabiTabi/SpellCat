@@ -1,8 +1,8 @@
 ﻿#include "Battle.h"
 #include <iostream>
 
-Battle::Battle(Player& p, Enemy& e, Deck& d, Dictionary& dictRef,GameState& gState)
-    : player(p), enemy(e), deck(d), dict(dictRef), gState(gState) {
+Battle::Battle(Player& p, Enemy& e, Deck& d, Dictionary& dictRef,GameState& gState, int f)
+    : player(p), enemy(e), deck(d), dict(dictRef), gState(gState), floorNumber(f) {
     // initial draw
     
     hand = Hand();
@@ -107,13 +107,17 @@ void Battle::Update() {
 void Battle::Draw() {
     BeginDrawing();
     ClearBackground(GRAY);
+   
 
-    DrawRectangleRec(confirmBtn, DARKGREEN);
+    DrawRectangleRec(confirmBtn, !hand.wordBuffer.empty() ? GREEN: DARKGREEN);
     DrawRectangleLinesEx(confirmBtn, 2, BLACK);
     DrawText("CONFIRM", confirmBtn.x + 20, confirmBtn.y + 15, 20, WHITE);
 
     DrawText(("Player Health: " + std::to_string(player.hp)).c_str(), 50, 50, 20, BLACK);
-    DrawText(("Enemy HP: " + std::to_string(enemy.hp)).c_str(), 800, 50, 20, RED);
+    DrawText((enemy.name + " (HP: " + std::to_string(enemy.hp) +
+        ")").c_str(),
+        800, 50, 20, RED);
+
     DrawText(("Enemy plans to deal " + std::to_string(enemy.damage) + " dmg").c_str(),
         700, 80, 20, MAROON);
     DrawText(("Deck: " + std::to_string(deck.deck.size())).c_str(),
@@ -122,6 +126,8 @@ void Battle::Draw() {
     DrawText(("Discard: " + std::to_string(hand.discardPile.size())).c_str(),
         50, 130, 20, DARKGRAY);
 
+    DrawText(("Floor: " + std::to_string(floorNumber)).c_str(),
+        400, 20, 25, DARKBLUE);
     std::string currentWord;
     for (Card& c : hand.wordBuffer) currentWord += c.name;
 

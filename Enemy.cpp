@@ -18,3 +18,29 @@ void Enemy::TakeTurn(int& playerHp, int defense)
     if (playerHp < 0) playerHp = 0;
 
 }
+
+Enemy Enemy::GenerateRandomEnemy(int floorNumber) {
+    Enemy e;
+    int choice = GetRandomValue(0, 2); // slime, goblin, wizard
+
+    if (choice == 0) {
+        e.type = EnemyType::SLIME;
+        e.name = "Slime";
+        e.hp = 5 + floorNumber * 2;         // scales moderately
+        e.attack = 1 + floorNumber / 2;
+    }
+    else if (choice == 1) {
+        e.type = EnemyType::GOBLIN;
+        e.name = "Goblin";
+        e.hp = 8 + floorNumber * 3;         // stronger scaling
+        e.attack = 2 + floorNumber / 2;
+    }
+    else {
+        e.type = EnemyType::WIZARD;
+        e.name = "Wizard";
+        e.hp = 6 + floorNumber * 4;         // glass cannon but strong later
+        e.attack = 3 + floorNumber / 2;
+    }
+
+    return e;
+}

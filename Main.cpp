@@ -22,19 +22,19 @@ int main() {
 
     Deck playerDeck;
     playerDeck.deck.push_back({ 1, "S", "Attack", "Use in words", 1 });
-  //  playerDeck.deck.push_back({ 2, "A", "Attack", "Use in words", 1 });
+    playerDeck.deck.push_back({ 2, "A", "Attack", "Use in words", 1 });
     playerDeck.deck.push_back({ 3, "T", "Attack", "Use in words", 1 });
     playerDeck.deck.push_back({ 4, "R", "Attack", "Use in words", 1 });
     playerDeck.deck.push_back({ 5, "I", "Attack", "Use in words", 1 });
     playerDeck.deck.push_back({ 6, "K", "Attack", "Use in words", 1 });
     playerDeck.deck.push_back({ 7, "E", "Attack", "Use in words", 1 });
-   // playerDeck.deck.push_back({ 8, "D", "Defense", "Use in words", 1 });
-   // playerDeck.deck.push_back({ 9, "E", "Defense", "Use in words", 1 });
-   // playerDeck.deck.push_back({ 10, "F", "Defense", "Use in words", 1 });
-   // playerDeck.deck.push_back({ 11, "E", "Defense", "Use in words", 1 });
-   // playerDeck.deck.push_back({ 12, "N", "Defense", "Use in words", 1 });
-  //  playerDeck.deck.push_back({ 13, "S", "Defense", "Use in words", 1 });
-   // playerDeck.deck.push_back({ 14, "E", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 8, "D", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 9, "E", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 10, "F", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 11, "E", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 12, "N", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 13, "S", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 14, "E", "Defense", "Use in words", 1 });
     playerDeck.Shuffle();
 
 
@@ -43,7 +43,7 @@ int main() {
     std::unique_ptr<RewardScreen> rewardScreen = nullptr;
     // Move all switch-case scoped objects outside the loop to avoid E0546
     DefeatScreen defeatScreen;
-
+    int floorNumber = 0;
 
     while (!WindowShouldClose()) {
         
@@ -52,20 +52,22 @@ int main() {
         case GameState::BATTLE:
             if (!battle) {
 
-                enemy = Enemy();
-                enemy.hp = 1;
+                enemy= enemy.GenerateRandomEnemy(floorNumber);
                 enemy.PlanTurn();
-                battle = std::make_unique<Battle>(player, enemy, playerDeck, dict, gameState);
+                floorNumber++;
+
+                
+                battle = std::make_unique<Battle>(player, enemy, playerDeck, dict, gameState, floorNumber);
             }
             battle->Update();
             battle->Draw();
 
             if (enemy.hp <= 0) {
-                battle->EndBattle();   // ✅ cleanup first
+                battle->EndBattle();   
                 gameState = GameState::REWARD;
             }
             if (player.hp <= 0) {
-                battle->EndBattle();   // ✅ cleanup too
+                battle->EndBattle();   
                 gameState = GameState::DEFEAT;
             }
             break;
@@ -73,31 +75,26 @@ int main() {
             
 
         case GameState::REWARD:
-            if (!rewardScreen)
-                rewardScreen = std::make_unique<RewardScreen>();
+            if (!rewardScreen)   rewardScreen = std::make_unique<RewardScreen>();
 
             rewardScreen->Update();
             rewardScreen->Draw();
 
-            if (rewardScreen->rewardChosen) {
-                if (!rewardScreen->skipped) {
-                    playerDeck.deck.push_back(rewardScreen->chosenCard);
+            
 
-                    std::cout << "Deck size after reward: " << playerDeck.deck.size() << std::endl;
-                    std::cout << rewardScreen->chosenCard.name;
+                if (rewardScreen->rewardChosen) {
+                    if (!rewardScreen->skipped) {
+                        playerDeck.deck.push_back(rewardScreen->chosenCard);
+                    }
 
+                    enemy = enemy.GenerateRandomEnemy(floorNumber);
+                    enemy.PlanTurn();
+                    floorNumber++;
+
+                    battle = std::make_unique<Battle>(player, enemy, playerDeck, dict, gameState, floorNumber);
+                    gameState = GameState::BATTLE;
+                    rewardScreen.reset();
                 }
-
-                // Start new enemy/battle
-                enemy = Enemy();
-                enemy.hp = 1;
-                enemy.PlanTurn();
-                std::cout << "Deck size after reward: " << playerDeck.deck.size() << std::endl;
-                battle = std::make_unique<Battle>(player, enemy, playerDeck, dict, gameState);
-                std::cout << "Deck size after reward: " << playerDeck.deck.size() << std::endl;
-                gameState = GameState::BATTLE;
-                rewardScreen.reset();
-
 
             break;
 
@@ -105,7 +102,7 @@ int main() {
             defeatScreen.Update();
             defeatScreen.Draw();
             break;
-            }
+            
             ;
         }
         CloseWindow();
