@@ -41,6 +41,34 @@ void Hand::DrawHand(int x, int y)
 
 
 
+void Hand::DrawingCardsFromDeck(Deck& deck, int count)
+{
+    
+        for (int i = 0; i < count; i++) {
+            if (deck.deck.empty()) {
+                
+                if (!discardPile.empty()) {
+                    
+
+                    deck.deck = discardPile;
+                    discardPile.clear();
+                    deck.Shuffle();
+                }
+
+            }
+
+            if (!deck.deck.empty()) {
+                Add(deck.Draw());
+            }
+        }
+
+        LayoutHand(hand);
+    }
+
+
+
+
+
 
 
 

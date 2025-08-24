@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="Dictionary.cpp" />
     <ClCompile Include="Encounter.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Hand.cpp" />
@@ -136,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="Dictionary.h" />
     <ClInclude Include="Encounter.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Hand.h" />

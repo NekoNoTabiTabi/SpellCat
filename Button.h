@@ -6,6 +6,6 @@ class Button
 
 	Rectangle button;
 
-    void Draw();
+    
 };
 

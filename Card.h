@@ -7,6 +7,7 @@
 
 
 struct Card {
+    int id;
     std::string name;
     std::string type;   
     std::string effect; 
