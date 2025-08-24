@@ -28,10 +28,15 @@ void RewardScreen::Draw() {
     DrawText("Choose your reward", 300, 100, 30, DARKGREEN);
 
     DrawRectangle(100, 200, 120, 180, LIGHTGRAY);
-    DrawText("Power Card", 110, 250, 20, BLACK);
+    DrawText("Card", 110, 250, 20, BLACK);
 
     DrawRectangle(300, 200, 120, 180, LIGHTGRAY);
     DrawText("Heal 5", 310, 250, 20, BLACK);
+
+    Rectangle skipBtn = { 400, 450, 200, 50 };
+    DrawRectangleRec(skipBtn, DARKGRAY);
+    DrawRectangleLinesEx(skipBtn, 2, BLACK);
+    DrawText("Skip", skipBtn.x + 70, skipBtn.y + 15, 25, WHITE);
 
     EndDrawing();
 }

@@ -1,7 +1,6 @@
 #include "Deck.h"
 
 
-
 void Deck::Shuffle()
 {
     std::random_device rd;

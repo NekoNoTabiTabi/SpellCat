@@ -20,14 +20,23 @@ int main() {
     enemy.hp = 20;
 
     Deck playerDeck;
-    playerDeck.deck.push_back({ 1, "S", "Letter", "Use in words", 1 });
-    playerDeck.deck.push_back({ 2, "A", "Letter", "Use in words", 1 });
-    playerDeck.deck.push_back({ 3, "T", "Letter", "Use in words", 1 });
-    playerDeck.deck.push_back({ 4, "R", "Letter", "Use in words", 1 });
-    playerDeck.deck.push_back({ 5, "I", "Letter", "Use in words", 1 });
-    playerDeck.deck.push_back({ 6, "K", "Letter", "Use in words", 1 });
-    playerDeck.deck.push_back({ 7, "E", "Letter", "Use in words", 1 });
+    playerDeck.deck.push_back({ 1, "S", "Attack", "Use in words", 1 });
+    playerDeck.deck.push_back({ 2, "A", "Attack", "Use in words", 1 });
+    playerDeck.deck.push_back({ 3, "T", "Attack", "Use in words", 1 });
+    playerDeck.deck.push_back({ 4, "R", "Attack", "Use in words", 1 });
+    playerDeck.deck.push_back({ 5, "I", "Attack", "Use in words", 1 });
+    playerDeck.deck.push_back({ 6, "K", "Attack", "Use in words", 1 });
+    playerDeck.deck.push_back({ 7, "E", "Attack", "Use in words", 1 });
+    playerDeck.deck.push_back({ 8, "D", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 9, "E", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 10, "F", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 11, "E", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 12, "N", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 13, "S", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back({ 14, "E", "Defense", "Use in words", 1 });
     playerDeck.Shuffle();
+
+
     GameState gameState = GameState::BATTLE;
     std::unique_ptr<RewardScreen> rewardScreen = nullptr;
     // Move all switch-case scoped objects outside the loop to avoid E0546

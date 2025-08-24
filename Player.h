@@ -4,6 +4,7 @@ class Player
 {
 public:
 	int hp = 20;
-	int CalculateDamage(const std::string& word, bool isValidWord);
+	int CalculateDamage( std::vector<Card>, bool isValidWord);
+	int CalculateDefense( std::vector<Card>, bool isValidWord);
 };
 

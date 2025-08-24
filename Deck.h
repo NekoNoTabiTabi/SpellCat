@@ -5,10 +5,10 @@
 #include <string>
 #include <algorithm>
 #include <random>
-#include "Card.cpp"
+#include "Card.h"
 
-struct Deck {
-   
+class Deck {
+    public:
     std::vector<Card> deck;
 
     

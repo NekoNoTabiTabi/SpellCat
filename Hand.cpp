@@ -19,13 +19,13 @@ void Hand::DrawCard(Card& c) {
 void Hand::LayoutHand(std::vector<Card>& hand)
 {
     for (int i = 0; i < hand.size(); i++) {
-        hand[i].cardBounds = { 50.0f + i * 150.0f, 400.0f, 120.0f, 180.0f };
+        hand[i].cardBounds = { 50.0f + i * 100.0f, 400.0f, 120.0f, 180.0f };
     }
 }
 
 void Hand::DrawHand(int x, int y)
 {
-    // Example implementation: Draw each card in the hand horizontally
+    
     int cardSpacing = 10;
     int cardWidth = 80;
     int cardHeight = 120;
@@ -34,7 +34,9 @@ void Hand::DrawHand(int x, int y)
     {
         Card& card = hand[i];
         card.cardBounds = { static_cast<float>(x + i * (cardWidth + cardSpacing)), static_cast<float>(y), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
-        DrawRectangleRec(card.cardBounds, card.selected ? RED : DARKGRAY);
+        if (card.type == "Attack") DrawRectangleRec(card.cardBounds, card.selected ? RED : ORANGE);
+        if (card.type == "Defense") DrawRectangleRec(card.cardBounds, card.selected ? RED : SKYBLUE);
+        
         DrawText(card.name.c_str(), static_cast<int>(card.cardBounds.x) + 5, static_cast<int>(card.cardBounds.y) + 5, 16, WHITE);
     }
 }

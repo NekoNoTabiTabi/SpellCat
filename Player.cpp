@@ -1,26 +1,29 @@
 #include "Player.h"
 
-int Player::CalculateDamage(const std::string& word, bool isValidWord)
+int Player::CalculateDamage(  std::vector<Card> word, bool isValidWord)
 {
     int damage = 0;
-
-    // Rule 1: base damage = word length
-    damage += word.length();
-
-    // Rule 2: bonus for longer words
-    if (word.length() >= 5) {
-        damage += 3;
-    }
-
-    // Rule 3: bonus for specific letters
-    for (char c : word) {
-        if (c == 'K' || c == 'Z' || c == 'X' || c == 'Q') {
-            damage += 2; // rare letters hit harder
-        }
-    }
-    
-    if (!isValidWord) damage /= 2;
-
+    int damagecount= 0;
+    for (Card& c : word) {
+        if (c.type == "Attack") damage += c.value;
+        damagecount++;
+    }   
+    if (!isValidWord) damage /= 2 ;
+    else damage += damagecount;
     
     return damage;
+}
+
+int Player::CalculateDefense( std::vector<Card> word, bool isValidWord)
+ {
+    int defense = 0;
+    int defcount = 0;
+    for (Card& c : word) {
+        if (c.type == "Defense") defense += c.value, defcount++;
+    }
+    if (!isValidWord) defense /= 2;
+    else defense += defcount;
+
+
+    return defense;
 }

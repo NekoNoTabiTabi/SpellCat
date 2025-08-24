@@ -44,8 +44,13 @@ void Battle::ResolvePlayerAttack() {
     std::string currentWord;
     for (Card& c : hand.wordBuffer) currentWord += c.name;
 
-    if (!currentWord.empty()) {
-        int damage = player.CalculateDamage(currentWord, dict.IsValidWord(currentWord));
+      if (!currentWord.empty()) {
+        int damage = player.CalculateDamage(hand.wordBuffer, dict.IsValidWord(currentWord));
+        int defense = player.CalculateDefense(hand.wordBuffer, dict.IsValidWord(currentWord));
+
+        //int damage = player.CalculateDamage(currentWord, dict.IsValidWord(currentWord));
+        //int defense = player.CalculateDefense(currentWord, dict.IsValidWord(currentWord));
+
         enemy.hp -= damage;
 
         // discard used cards
@@ -71,7 +76,7 @@ void Battle::ResolvePlayerAttack() {
 
         // enemy turn
         if (enemy.hp > 0) {
-            enemy.TakeTurn(player.hp);
+            enemy.TakeTurn(player.hp, defense);
             enemy.PlanTurn();
         }
     }
@@ -123,8 +128,10 @@ void Battle::Draw() {
     }
 
     if (!hand.wordBuffer.empty()) {
-        int dmgPreview = player.CalculateDamage(currentWord, dict.IsValidWord(currentWord));
-        DrawText(("Word Damage: " + std::to_string(dmgPreview)).c_str(), 50, 350, 20, RED);
+        int dmgPreview = player.CalculateDamage(hand.wordBuffer, dict.IsValidWord(currentWord));
+        DrawText(("Damage: " + std::to_string(dmgPreview)).c_str(), 50, 350, 20, RED);
+        int defPreview = player.CalculateDefense(hand.wordBuffer, dict.IsValidWord(currentWord));
+        DrawText(("Defense: " + std::to_string(defPreview)).c_str(), 50, 325, 20, BLUE);
     }
 
     hand.DrawHand(50, 400);

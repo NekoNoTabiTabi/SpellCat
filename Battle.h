@@ -6,6 +6,8 @@
 #include "Dictionary.h"
 #include <raylib.h>
 #include "GameState.h"
+#include "Card.h"
+
 
     class Battle {
     public:
@@ -21,7 +23,7 @@
             if (this != &other) {
                 
                 enemy = other.enemy;
-                deck = other.deck;                  
+                                 
                 gState = other.gState;
                 confirmBtn = other.confirmBtn;
              
