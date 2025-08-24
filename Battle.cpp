@@ -1,8 +1,8 @@
-#include "Battle.h"
+﻿#include "Battle.h"
 #include <iostream>
 
-Battle::Battle(Player& p, Enemy& e, Deck& d, Dictionary& dictRef)
-    : player(p), enemy(e), deck(d), dict(dictRef) {
+Battle::Battle(Player& p, Enemy& e, Deck& d, Dictionary& dictRef,GameState& gState)
+    : player(p), enemy(e), deck(d), dict(dictRef), gState(gState) {
     // initial draw
     for (int i = 0; i < handLimit && !deck.deck.empty(); i++) {
         hand.Add(deck.Draw());
@@ -83,6 +83,15 @@ void Battle::Update() {
     if (hand.hand.size() < handLimit) {
         int cardsToDraw = handLimit - hand.hand.size();
         hand.DrawingCardsFromDeck(deck, cardsToDraw);
+    }
+
+    if (enemy.hp <= 0) {
+        // Enemy defeated → switch to reward
+        gState = GameState::REWARD;
+    }
+    else if (player.hp <= 0) {
+        // Player lost → switch to defeat
+        gState = GameState::DEFEAT;
     }
 }
 

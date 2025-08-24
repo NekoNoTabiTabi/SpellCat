@@ -24,9 +24,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Deck.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,9 +42,6 @@
     <ClCompile Include="Deck.cpp">
       <Filter>CardRelated</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="Dictionary.cpp">
       <Filter>CardRelated</Filter>
     </ClCompile>
@@ -57,31 +51,46 @@
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="RewardScreen.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.h">
+      <Filter>CardRelated</Filter>
+    </ClCompile>
+    <ClCompile Include="DefeatScreen.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Encounter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Header Files</Filter>
+      <Filter>CardRelated</Filter>
     </ClInclude>
     <ClInclude Include="Dictionary.h">
-      <Filter>Header Files</Filter>
+      <Filter>CardRelated</Filter>
+    </ClInclude>
+    <ClInclude Include="Hand.h">
+      <Filter>CardRelated</Filter>
+    </ClInclude>
+    <ClInclude Include="RewardScreen.h">
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Battle.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Encounter.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DefeatScreen.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

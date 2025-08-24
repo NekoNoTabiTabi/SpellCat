@@ -24,6 +24,7 @@
     <ProjectGuid>{095406dd-2eaa-475c-a7da-704c7b9d4360}</ProjectGuid>
     <RootNamespace>TempCardGame</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>SpellCat</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -124,8 +125,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Battle.cpp" />
-    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="DefeatScreen.cpp" />
     <ClCompile Include="Dictionary.cpp" />
     <ClCompile Include="Encounter.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -134,16 +135,19 @@
     <ClCompile Include="Deck.h" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RewardScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battle.h" />
-    <ClInclude Include="Button.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="DefeatScreen.h" />
     <ClInclude Include="Dictionary.h" />
     <ClInclude Include="Encounter.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RewardScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
