@@ -11,7 +11,7 @@ struct Deck {
    
     std::vector<Card> deck;
 
-    int RemainingCard() const;
+    
     void Shuffle();
     Card Draw();
 };

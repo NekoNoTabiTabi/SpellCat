@@ -1,12 +1,7 @@
 #include "Deck.h"
 
 
-int Deck::RemainingCard() const{
- 
-    int remaining = deck.size();
-    return remaining;
 
-}
 void Deck::Shuffle()
 {
     std::random_device rd;
