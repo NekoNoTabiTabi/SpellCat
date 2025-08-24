@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Player.h"
 #include "Enemy.h"
 #include "Deck.h"
@@ -13,30 +13,23 @@
     public:
         Battle(Player& p, Enemy& e, Deck& d, Dictionary& dict, GameState& gState);
 
-        // Add a move assignment operator to allow reassigning Battle objects
-        Battle(Battle&& other) noexcept
-            : player(other.player), enemy(other.enemy), deck(other.deck), hand(std::move(other.hand)), dict(other.dict), gState(other.gState),
-              confirmBtn(other.confirmBtn), handLimit(other.handLimit)
-        {}
 
-        Battle& operator=(Battle&& other) noexcept {
-            if (this != &other) {
-                
-                enemy = other.enemy;
-                                 
-                gState = other.gState;
-                confirmBtn = other.confirmBtn;
-             
-            }
-            return *this;
-        }
-
-        // Delete copy constructor and copy assignment to avoid accidental copies
         Battle(const Battle&) = delete;
         Battle& operator=(const Battle&) = delete;
+        Battle(Battle&&) = delete;
+        Battle& operator=(Battle&&) = delete;
+        
+        
+
+       
+
+        // Delete copy constructor and copy assignment to avoid accidental copies
+        
+      
 
         void Update();
         void Draw();
+        void EndBattle();
 
     private:
         Player& player;

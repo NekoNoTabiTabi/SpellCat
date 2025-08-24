@@ -14,7 +14,7 @@ public:
     void LayoutHand(std::vector<Card>& hand);
     void DrawHand(int x, int y);
     void DrawingCardsFromDeck(Deck& deck, int count);
-
+   
     //maybe a bit redundant -sleep deprived me
     
 
@@ -25,7 +25,7 @@ public:
     std::vector<Card>::const_iterator end() const { return hand.end(); }
 
 private:
-    
+   
     
    
 };

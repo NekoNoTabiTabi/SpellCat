@@ -4,8 +4,12 @@
 Battle::Battle(Player& p, Enemy& e, Deck& d, Dictionary& dictRef,GameState& gState)
     : player(p), enemy(e), deck(d), dict(dictRef), gState(gState) {
     // initial draw
+    
+    hand = Hand();
+    
     for (int i = 0; i < handLimit && !deck.deck.empty(); i++) {
         hand.Add(deck.Draw());
+        std::cout << "Drawn: "<< hand.hand[i].name<<"\n";
     }
     hand.LayoutHand(hand.hand);
     enemy.PlanTurn();
@@ -138,4 +142,32 @@ void Battle::Draw() {
 
     EndDrawing();
 }
+void Battle::EndBattle() {
+    // Move remaining hand cards into discard
+    for (auto& c : hand.hand) {
+        // Replace this line in EndBattle():
+        // std::cout << "Put Backed:"<< hand.hand[c].name;
 
+        // With this:
+        std::cout << "Put Backed:" << c.name << "/n";
+        hand.discardPile.push_back(c);
+        
+
+    }
+    hand.hand.clear();
+
+    // Move word buffer too just in case
+    for (auto& c : hand.wordBuffer) {
+        hand.discardPile.push_back(c);
+    }
+    hand.wordBuffer.clear();
+
+    // Shuffle discard back into deck
+    if (!hand.discardPile.empty()) {
+        for (auto& c : hand.discardPile) {
+            deck.deck.push_back(c);
+        }
+        hand.discardPile.clear();
+        deck.Shuffle();
+    }
+}

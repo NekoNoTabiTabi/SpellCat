@@ -1,12 +1,5 @@
 #pragma once
 #include <string>
-enum class EnemyType {
-	SLIME,
-	GOBLIN,
-	WIZARD,
-	BOSS
-};
-
 class Enemy
 {
     public:
