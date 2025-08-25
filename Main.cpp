@@ -13,7 +13,8 @@ int main() {
     InitWindow(1000, 600, "TempRogueLike");
 
     Dictionary dict;
-    dict.LoadDictionary("words.txt");
+    std::string basePath = GetWorkingDirectory(); // Raylib helper
+    dict.LoadDictionary(basePath + "/words.txt");;
 
     Player player;
     player.hp = 10;
