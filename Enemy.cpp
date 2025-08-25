@@ -1,12 +1,14 @@
 #include "Enemy.h"
 #include <raylib.h>
 #include <iostream>
-void Enemy::PlanTurn()
+void Enemy::PlanTurn(Enemy e)
 {
-    damage = GetRandomValue(1, 3);
+    damage = GetRandomValue(0,1 );
+    damage += e.attack;
 }
-void Enemy::TakeTurn(int& playerHp, int defense) 
+void Enemy::TakeTurn(Enemy e, int& playerHp, int defense) 
 {
+    
     damage -= defense;
     if (damage < 0) damage = 0;
 

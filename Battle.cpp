@@ -12,7 +12,7 @@ Battle::Battle(Player& p, Enemy& e, Deck& d, Dictionary& dictRef,GameState& gSta
         std::cout << "Drawn: "<< hand.hand[i].name<<"\n";
     }
     hand.LayoutHand(hand.hand);
-    enemy.PlanTurn();
+    enemy.PlanTurn(enemy);
 }
 
 void Battle::HandleInput() {
@@ -80,8 +80,8 @@ void Battle::ResolvePlayerAttack() {
 
         // enemy turn
         if (enemy.hp > 0) {
-            enemy.TakeTurn(player.hp, defense);
-            enemy.PlanTurn();
+            enemy.TakeTurn(enemy, player.hp, defense);
+            enemy.PlanTurn(enemy);
         }
     }
 }

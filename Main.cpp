@@ -8,6 +8,7 @@
 #include "RewardScreen.h"
 #include "DefeatScreen.h"
 #include <iostream>
+//random comment do remo ve
 int main() {
     InitWindow(1000, 600, "TempRogueLike");
 
@@ -53,7 +54,8 @@ int main() {
             if (!battle) {
 
                 enemy= enemy.GenerateRandomEnemy(floorNumber);
-                enemy.PlanTurn();
+                std::cout << "Generated: " << enemy.name;
+                enemy.PlanTurn(enemy);
                 floorNumber++;
 
                 
@@ -88,7 +90,7 @@ int main() {
                     }
 
                     enemy = enemy.GenerateRandomEnemy(floorNumber);
-                    enemy.PlanTurn();
+                    enemy.PlanTurn(enemy);
                     floorNumber++;
 
                     battle = std::make_unique<Battle>(player, enemy, playerDeck, dict, gameState, floorNumber);
