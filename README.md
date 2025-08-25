@@ -1,7 +1,7 @@
 **How to run the file go to ./bin and run the exe file**
 
 **Current Gameplay Rules:
-**At the start of the game you are given a set deck containing 14 cards that contains letters.**
+At the start of the game you are given a set deck containing 14 cards that contains letters.
 
 At the beginning of your turn you draw 8 cards fron your deck, you select the cards you want to use to spell a word.
 
