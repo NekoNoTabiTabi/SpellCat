@@ -1,14 +1,22 @@
 #include "DefeatScreen.h"
 void DefeatScreen::Update() {
-    if (IsKeyPressed(KEY_ENTER)) {
-        CloseWindow(); // quit game
+    Vector2 mousePos = GetMousePosition();
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        if (CheckCollisionPointRec(mousePos, retryBtn)) {
+            retryChosen = true;
+        }
     }
 }
 
+
 void DefeatScreen::Draw() {
     BeginDrawing();
-    ClearBackground(MAROON);
-    DrawText("You Lost!", 400, 250, 40, WHITE);
-    DrawText("Press Enter to Exit", 350, 300, 20, WHITE);
+    ClearBackground(DARKGRAY);
+
+    DrawText("Defeat!", 420, 200, 40, RED);
+
+    DrawRectangleRec(retryBtn, LIGHTGRAY);
+    DrawRectangleLinesEx(retryBtn, 3, BLACK);
+    DrawText("RETRY", retryBtn.x + 50, retryBtn.y + 15, 30, BLACK);
     EndDrawing();
 }

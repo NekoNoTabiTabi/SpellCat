@@ -1,5 +1,6 @@
 #include "Deck.h"
-
+#include <algorithm>
+#include <random>
 
 void Deck::Shuffle()
 {

@@ -100,9 +100,45 @@ int main() {
 
             break;
 
-            case GameState::DEFEAT:
+        case GameState::DEFEAT:
             defeatScreen.Update();
             defeatScreen.Draw();
+
+            if (defeatScreen.retryChosen) {
+                // Reset player
+                player.hp = 10;
+
+                // Reset deck (you might want to rebuild it or keep progress)
+                playerDeck.deck.clear();
+                playerDeck.deck.push_back({ 1, "S", "Attack", "Use in words", 1 });
+                playerDeck.deck.push_back({ 2, "A", "Attack", "Use in words", 1 });
+                playerDeck.deck.push_back({ 3, "T", "Attack", "Use in words", 1 });
+                playerDeck.deck.push_back({ 4, "R", "Attack", "Use in words", 1 });
+                playerDeck.deck.push_back({ 5, "I", "Attack", "Use in words", 1 });
+                playerDeck.deck.push_back({ 6, "K", "Attack", "Use in words", 1 });
+                playerDeck.deck.push_back({ 7, "E", "Attack", "Use in words", 1 });
+                playerDeck.deck.push_back({ 8, "O", "Defense", "Use in words", 1 });
+                playerDeck.deck.push_back({ 9, "E", "Defense", "Use in words", 1 });
+                playerDeck.deck.push_back({ 10, "F", "Defense", "Use in words", 1 });
+                playerDeck.deck.push_back({ 11, "A", "Defense", "Use in words", 1 });
+                playerDeck.deck.push_back({ 12, "U", "Defense", "Use in words", 1 });
+                playerDeck.deck.push_back({ 13, "S", "Defense", "Use in words", 1 });
+                playerDeck.deck.push_back({ 14, "E", "Defense", "Use in words", 1 });
+                playerDeck.Shuffle();
+
+                // Reset floor
+                floorNumber = 1;
+
+                // Spawn new battle
+                enemy = enemy.GenerateRandomEnemy(floorNumber);
+                enemy.PlanTurn(enemy);
+                battle = std::make_unique<Battle>(player, enemy, playerDeck, dict, gameState, floorNumber);
+
+                // Reset defeat screen
+                defeatScreen.Reset();
+
+                gameState = GameState::BATTLE;
+            }
             break;
             
             ;
