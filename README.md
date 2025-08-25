@@ -18,6 +18,7 @@
 **Artifact System**
 **Events System**
 **Better enemy attacks**
+**Adding Conjunctions**
 
 **Bugs to fix:**
 **Reward screen card bounds do not allign with the visuals displayed****
