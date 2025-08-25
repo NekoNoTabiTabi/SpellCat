@@ -14,11 +14,18 @@
 **Travel through as many floors before you get killed.**
 
 **In Progress:**
+
 **Better Game Visuals**
+
 **Artifact System**
+
 **Events System**
+
 **Better enemy attacks**
+
 **Adding Conjunctions**
+
+**Deck Viewing**
 
 **Bugs to fix:**
 **Reward screen card bounds do not allign with the visuals displayed****
