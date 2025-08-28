@@ -114,15 +114,20 @@ void Battle::Draw() {
     DrawText("CONFIRM", confirmBtn.x + (confirmBtn.width / 2 - (confirmBtn.width * 0.30)), confirmBtn.y + (confirmBtn.height / 2 - (confirmBtn.height * 0.20f)), (((confirmBtn.height * 2) + (confirmBtn.width * 2))*0.05f), WHITE);
 
     //Player Hp Bar
+    int scale = 7;
+    Rectangle playerTextureSource = {0,0,32,32};
+    Rectangle playerDestinationSource = { SCREEN_WIDTH * 0.20,SCREEN_HEIGHT * 0.25,playerTextureSource.width*scale,playerTextureSource.height * scale };
     DrawText(("Player Health: " + std::to_string(player.hp)).c_str(), SCREEN_WIDTH*0.20 , SCREEN_HEIGHT*0.50, TextScale, BLACK);
-    
+    DrawTexturePro(player.sprite, playerTextureSource, playerDestinationSource, {0,0},0,WHITE);
     //Enemy Hp BAR
-    DrawText((enemy.name + " (HP: " + std::to_string(enemy.hp) +")").c_str(), SCREEN_WIDTH * 0.70, SCREEN_HEIGHT * 0.50, TextScale, RED);
+   
     
     //Enemy Plan, Note: plan to be relative to where enemy sprite is
-    DrawText(("Enemy plans to deal " + std::to_string(enemy.damage) + " dmg").c_str(),
-        SCREEN_WIDTH * 0.65, 80, TextScale, MAROON);
-    
+    Rectangle enemyTextureSource = { 0,0,32,32 };
+    Rectangle enemyDestinationSource = { SCREEN_WIDTH * 0.60,SCREEN_HEIGHT * 0.25,enemyTextureSource.width * scale,enemyTextureSource.height * scale };
+    DrawText(("Enemy plans to deal " + std::to_string(enemy.damage) + " dmg").c_str(),SCREEN_WIDTH * 0.65, 80, TextScale, MAROON);
+    DrawText((enemy.name + " (HP: " + std::to_string(enemy.hp) + ")").c_str(), enemyDestinationSource.x, enemyDestinationSource.y+20, TextScale, RED);
+    DrawTexturePro(enemy.sprite, enemyTextureSource, enemyDestinationSource, { 0,0 }, 0, WHITE);
     //Deck and Discard Pile Note: may be Replaced with buttons to allow deck preview or see what's left inside
     DrawText(("Deck: " + std::to_string(deck.deck.size())).c_str(),
         confirmBtn.x, confirmBtn.y-50, TextScale, BLACK);

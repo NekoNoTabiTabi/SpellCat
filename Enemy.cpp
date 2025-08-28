@@ -29,18 +29,21 @@ Enemy Enemy::GenerateRandomEnemy(int floorNumber) {
         e.name = "Slime";
         e.hp = 5 + floorNumber * 2;         // scales moderately
         e.attack = 1 + floorNumber / 2;
+        e.sprite = LoadTexture("assets\\enemy_sprite\\Slime.png");
     }
     else if (choice == 1) {
         e.type = EnemyType::GOBLIN;
         e.name = "Goblin";
         e.hp = 8 + floorNumber * 3;         // stronger scaling
         e.attack = 2 + floorNumber / 2;
+        e.sprite = LoadTexture("assets\\enemy_sprite\\Goblin.png");
     }
     else {
         e.type = EnemyType::WIZARD;
         e.name = "Wizard";
         e.hp = 6 + floorNumber * 4;         // glass cannon but strong later
         e.attack = 3 + floorNumber / 2;
+        e.sprite = LoadTexture("assets\\enemy_sprite\\Wizard.png");
     }
     std::cout << "Generated: " << e.name<<"\n";
     return e;
