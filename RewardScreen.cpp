@@ -1,12 +1,22 @@
 ﻿#include "RewardScreen.h"
 #include <iostream>
 
+RewardScreen::RewardScreen(Deck& d) : deck(d) {
+    GenerateRewards(d);
+}
+
+
 void RewardScreen::Update(){
+    
     Vector2 mousePos = GetMousePosition();
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        for (int i = 0; i < rewardOptions.size(); i++) {
+
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    {
+        for (int i = 0; i < rewardOptions.size(); i++) 
+        {
             Rectangle optionRect = { 100.0f + i * 200.0f, 200.0f, 120.0f, 180.0f };
-            if (CheckCollisionPointRec(mousePos, optionRect)) {
+            if (CheckCollisionPointRec(mousePos, optionRect))
+            {
                
                 chosenCard = rewardOptions[i];
                 std::cout << "Chosen Card: " << chosenCard.name;
@@ -17,7 +27,8 @@ void RewardScreen::Update(){
 
         // skip button
         Rectangle skipBtn = { 400, 450, 200, 50 };
-        if (CheckCollisionPointRec(mousePos, skipBtn)) {
+        if (CheckCollisionPointRec(mousePos, skipBtn)) 
+        {
             std::cout << "Skipped reward" << std::endl;
             skipped = true;
             rewardChosen = true;
@@ -29,11 +40,11 @@ void RewardScreen::Update(){
 }
 
 void RewardScreen::Draw() {
-
+    
     BeginDrawing();
     ClearBackground(BEIGE);
     DrawText("Choose your reward", 300, 100, 30, DARKGREEN);
-
+    
     for (int i = 0; i < rewardOptions.size(); i++) {
         Rectangle optionRect = { 100.0f + i * 150.0f, 200.0f, 120.0f, 180.0f };
         if (rewardOptions[i].type == "Attack") DrawRectangleRec(optionRect, ORANGE);
@@ -51,21 +62,21 @@ void RewardScreen::Draw() {
     EndDrawing();
 }
 
-void RewardScreen::GenerateRewards()
+void RewardScreen::GenerateRewards(Deck& deck)
 {
     rewardOptions.clear();
 
-    // Example: generate 5 cards
+    char letter = 'A' + GetRandomValue(0, 25);
+
+
     for (int i = 0; i < 5; i++) {
-        Card c;
-        c.id = GetRandomValue(1000, 9999); // unique ID
-        c.name = std::string(1, 'A' + GetRandomValue(0, 25)); // random letter
-        std::string possibleTypes[2] = { "Attack", "Defense" };
+        char letter = 'A' + GetRandomValue(0, 25);
+        const std::string letterType[2] = { "Attack", "Defense" };
+        std::string type = letterType[GetRandomValue(1, 0)];
+        //(const std::string & name, const std::string & type, int value);
 
-        c.type = possibleTypes[GetRandomValue(0,1)];
-        c.effect = "Use in words";
-        c.value = 1;
+        
 
-        rewardOptions.push_back(c);
+        rewardOptions.push_back(deck.CreateCard(std::string(1, letter), type, 1));
     }
 }

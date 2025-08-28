@@ -32,6 +32,8 @@
         void EndBattle();
 
     private:
+        const int SCREEN_WIDTH = GetScreenWidth();
+        const int SCREEN_HEIGHT = GetScreenHeight();
         Player& player;
         Enemy& enemy;
         Deck& deck;
@@ -39,7 +41,8 @@
         Dictionary& dict;
         GameState& gState;
         int floorNumber;
-        Rectangle confirmBtn = { 800, 500, 150, 50 };
+
+        Rectangle confirmBtn = { SCREEN_WIDTH - (SCREEN_WIDTH* 0.20f), SCREEN_HEIGHT *0.8f, SCREEN_WIDTH*0.15f, SCREEN_HEIGHT*0.083f};
         int handLimit = 8;
 
         void HandleInput();

@@ -3,7 +3,6 @@
 #include <iostream>
 void Enemy::PlanTurn(Enemy e)
 {
-    damage = GetRandomValue(0,1 );
     damage += e.attack;
 }
 void Enemy::TakeTurn(Enemy e, int& playerHp, int defense) 
@@ -43,6 +42,6 @@ Enemy Enemy::GenerateRandomEnemy(int floorNumber) {
         e.hp = 6 + floorNumber * 4;         // glass cannon but strong later
         e.attack = 3 + floorNumber / 2;
     }
-
+    std::cout << "Generated: " << e.name<<"\n";
     return e;
 }

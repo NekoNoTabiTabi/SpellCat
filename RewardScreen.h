@@ -7,17 +7,21 @@
 #include "Deck.h"
 class RewardScreen {
 public:
+    RewardScreen(Deck& d);
     std::vector<Card> rewardOptions;
     bool skipped = false;
     bool rewardChosen = false;
     Card chosenCard;
-    RewardScreen() {
-        GenerateRewards();
-    }
-    ~RewardScreen() = default; //deconstructor
+
 
     void Update();
     void Draw();
-    void GenerateRewards();
+    void GenerateRewards(Deck& deck);
+    
+
+private:
+    Deck& deck;
+    const int SCREEN_WIDTH = GetScreenWidth();
+    const int SCREEN_HEIGHT = GetScreenHeight();
 };
 

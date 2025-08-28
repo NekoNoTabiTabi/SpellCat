@@ -25,7 +25,8 @@ public:
     std::vector<Card>::const_iterator end() const { return hand.end(); }
 
 private:
-   
+    const int SCREEN_WIDTH = GetScreenWidth();
+    const int SCREEN_HEIGHT = GetScreenHeight();
     
    
 };

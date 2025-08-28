@@ -12,4 +12,9 @@ public:
     void Draw();
 
     void Reset() { retryChosen = false; };
+
+private:
+    const int SCREEN_WIDTH = GetScreenWidth();
+    const int SCREEN_HEIGHT = GetScreenHeight();
+    
 };

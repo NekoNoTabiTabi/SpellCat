@@ -45,9 +45,6 @@
     <ClCompile Include="Dictionary.cpp">
       <Filter>CardRelated</Filter>
     </ClCompile>
-    <ClCompile Include="Battle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
@@ -58,6 +55,9 @@
       <Filter>CardRelated</Filter>
     </ClCompile>
     <ClCompile Include="DefeatScreen.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Battle.cpp">
       <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,9 +74,6 @@
     <ClInclude Include="RewardScreen.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="Battle.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Encounter.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -90,6 +87,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="DefeatScreen.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Battle.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,17 @@
 #include "Deck.h"
-#include <algorithm>
-#include <random>
+
+
+Card Deck::CreateCard(const std::string& name, const std::string& type, int value)
+    {
+        Card c;
+        c.id = nextId++; 
+        c.name = name;
+        c.type = type;
+        c.value = value;
+        c.effect = "temp";
+        return c;
+    }
+
 
 void Deck::Shuffle()
 {

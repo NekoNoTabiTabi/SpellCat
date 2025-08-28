@@ -1,15 +1,17 @@
 ﻿#include "Battle.h"
 #include <iostream>
 
-Battle::Battle(Player& p, Enemy& e, Deck& d, Dictionary& dictRef,GameState& gState, int f)
-    : player(p), enemy(e), deck(d), dict(dictRef), gState(gState), floorNumber(f) {
+
+
+
+
+Battle::Battle(Player& p, Enemy& e, Deck& d, Dictionary& dictRef, GameState& gState, int f)
+    : player(p), enemy(e), deck(d), dict(dictRef), gState(gState), floorNumber(f), hand() 
+{
     // initial draw
-    
-    hand = Hand();
-    
     for (int i = 0; i < handLimit && !deck.deck.empty(); i++) {
         hand.Add(deck.Draw());
-        std::cout << "Drawn: "<< hand.hand[i].name<<"\n";
+        std::cout << "Drawn: " << hand.hand[i].name << "\n";
     }
     hand.LayoutHand(hand.hand);
     enemy.PlanTurn(enemy);
@@ -51,10 +53,6 @@ void Battle::ResolvePlayerAttack() {
       if (!currentWord.empty()) {
         int damage = player.CalculateDamage(hand.wordBuffer, dict.IsValidWord(currentWord));
         int defense = player.CalculateDefense(hand.wordBuffer, dict.IsValidWord(currentWord));
-
-        //int damage = player.CalculateDamage(currentWord, dict.IsValidWord(currentWord));
-        //int defense = player.CalculateDefense(currentWord, dict.IsValidWord(currentWord));
-
         enemy.hp -= damage;
 
         // discard used cards
@@ -68,8 +66,8 @@ void Battle::ResolvePlayerAttack() {
                 hand.hand.erase(it);
             }
         }
-
         hand.wordBuffer.clear();
+
         hand.LayoutHand(hand.hand);
 
         if (deck.deck.empty() && !hand.discardPile.empty()) {
@@ -90,6 +88,7 @@ void Battle::Update() {
     HandleInput();
 
     if (hand.hand.size() < handLimit) {
+        //  initial draw
         int cardsToDraw = handLimit - hand.hand.size();
         hand.DrawingCardsFromDeck(deck, cardsToDraw);
     }
@@ -107,58 +106,60 @@ void Battle::Update() {
 void Battle::Draw() {
     BeginDrawing();
     ClearBackground(GRAY);
-   
-
+    
+    int TextScale = ((SCREEN_HEIGHT*2)+ (SCREEN_WIDTH*2))*0.00625;
+    //Confirm Butto
     DrawRectangleRec(confirmBtn, !hand.wordBuffer.empty() ? GREEN: DARKGREEN);
     DrawRectangleLinesEx(confirmBtn, 2, BLACK);
-    DrawText("CONFIRM", confirmBtn.x + 20, confirmBtn.y + 15, 20, WHITE);
+    DrawText("CONFIRM", confirmBtn.x + (confirmBtn.width / 2 - (confirmBtn.width * 0.30)), confirmBtn.y + (confirmBtn.height / 2 - (confirmBtn.height * 0.20f)), (((confirmBtn.height * 2) + (confirmBtn.width * 2))*0.05f), WHITE);
 
-    DrawText(("Player Health: " + std::to_string(player.hp)).c_str(), 50, 50, 20, BLACK);
-    DrawText((enemy.name + " (HP: " + std::to_string(enemy.hp) +
-        ")").c_str(),
-        800, 50, 20, RED);
-
+    //Player Hp Bar
+    DrawText(("Player Health: " + std::to_string(player.hp)).c_str(), SCREEN_WIDTH*0.20 , SCREEN_HEIGHT*0.50, TextScale, BLACK);
+    
+    //Enemy Hp BAR
+    DrawText((enemy.name + " (HP: " + std::to_string(enemy.hp) +")").c_str(), SCREEN_WIDTH * 0.70, SCREEN_HEIGHT * 0.50, TextScale, RED);
+    
+    //Enemy Plan, Note: plan to be relative to where enemy sprite is
     DrawText(("Enemy plans to deal " + std::to_string(enemy.damage) + " dmg").c_str(),
-        700, 80, 20, MAROON);
+        SCREEN_WIDTH * 0.65, 80, TextScale, MAROON);
+    
+    //Deck and Discard Pile Note: may be Replaced with buttons to allow deck preview or see what's left inside
     DrawText(("Deck: " + std::to_string(deck.deck.size())).c_str(),
-        50, 190, 20, BLACK);
-
+        confirmBtn.x, confirmBtn.y-50, TextScale, BLACK);
     DrawText(("Discard: " + std::to_string(hand.discardPile.size())).c_str(),
-        50, 130, 20, DARKGRAY);
-
+        confirmBtn.x, confirmBtn.y-25, TextScale, DARKGRAY);
+    
+    //Floor Text
     DrawText(("Floor: " + std::to_string(floorNumber)).c_str(),
-        400, 20, 25, DARKBLUE);
+        (SCREEN_WIDTH/2.25), SCREEN_HEIGHT*0.05, TextScale+10, DARKBLUE);
+
+
+    //WORD PREVIEW
     std::string currentWord;
     for (Card& c : hand.wordBuffer) currentWord += c.name;
-
-    DrawText(("Word: " + currentWord).c_str(), 50, 100, 30, DARKBLUE);
-
+    DrawText(( currentWord).c_str(), (SCREEN_WIDTH / 2.50), SCREEN_HEIGHT * 0.60f, TextScale + 30, DARKBLUE);
+    //IS VAlid?
     if (!dict.IsValidWord(currentWord) && !currentWord.empty()) {
-        DrawText("Not a valid word!", 400, 300, 30, RED);
+        DrawText("Not a valid word!", (SCREEN_WIDTH / 2.75), SCREEN_HEIGHT * 0.55f, TextScale + 20, RED);
     }
-
+    //damage an def Calc
     if (!hand.wordBuffer.empty()) {
         int dmgPreview = player.CalculateDamage(hand.wordBuffer, dict.IsValidWord(currentWord));
-        DrawText(("Damage: " + std::to_string(dmgPreview)).c_str(), 50, 350, 20, RED);
+        DrawText(("Damage: " + std::to_string(dmgPreview)).c_str(), SCREEN_WIDTH * 0.05, SCREEN_HEIGHT * 0.65f, TextScale, RED);
         int defPreview = player.CalculateDefense(hand.wordBuffer, dict.IsValidWord(currentWord));
-        DrawText(("Defense: " + std::to_string(defPreview)).c_str(), 50, 325, 20, BLUE);
+        DrawText(("Defense: " + std::to_string(defPreview)).c_str(), SCREEN_WIDTH * 0.05, SCREEN_HEIGHT * 0.62f, TextScale, BLUE);
     }
-
-    hand.DrawHand(50, 400);
+    //HAND
+    hand.DrawHand(SCREEN_WIDTH*0.05, SCREEN_HEIGHT*0.70f);
 
     EndDrawing();
 }
 void Battle::EndBattle() {
-    // Move remaining hand cards into discard
+    // Move remaining hand cards into discard pile 
     for (auto& c : hand.hand) {
-        // Replace this line in EndBattle():
-        // std::cout << "Put Backed:"<< hand.hand[c].name;
-
-        // With this:
+      
         std::cout << "Put Backed:" << c.name << "/n";
         hand.discardPile.push_back(c);
-        
-
     }
     hand.hand.clear();
 

@@ -10,10 +10,13 @@
 #include <iostream>
 //random comment do remo ve
 int main() {
-    InitWindow(1000, 600, "TempRogueLike");
+   const int SCREEN_WIDTH= 1200;
+   const int SCREEN_HEIGTH = 800;
+    
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGTH, "Spell Cat");
 
     Dictionary dict;
-    dict.LoadDictionary("assets/words.txt");;
+    dict.LoadDictionary("assets\\words.txt");;
 
     Player player;
     player.hp = 10;
@@ -22,27 +25,27 @@ int main() {
     enemy.hp = 1;
 
     Deck playerDeck;
-    playerDeck.deck.push_back({ 1, "S", "Attack", "Use in words", 1 });
-    playerDeck.deck.push_back({ 2, "A", "Attack", "Use in words", 1 });
-    playerDeck.deck.push_back({ 3, "T", "Attack", "Use in words", 1 });
-    playerDeck.deck.push_back({ 4, "R", "Attack", "Use in words", 1 });
-    playerDeck.deck.push_back({ 5, "I", "Attack", "Use in words", 1 });
-    playerDeck.deck.push_back({ 6, "K", "Attack", "Use in words", 1 });
-    playerDeck.deck.push_back({ 7, "E", "Attack", "Use in words", 1 });
-    playerDeck.deck.push_back({ 8, "O", "Defense", "Use in words", 1 });
-    playerDeck.deck.push_back({ 9, "E", "Defense", "Use in words", 1 });
-    playerDeck.deck.push_back({ 10, "F", "Defense", "Use in words", 1 });
-    playerDeck.deck.push_back({ 11, "A", "Defense", "Use in words", 1 });
-    playerDeck.deck.push_back({ 12, "U", "Defense", "Use in words", 1 });
-    playerDeck.deck.push_back({ 13, "S", "Defense", "Use in words", 1 });
-    playerDeck.deck.push_back({ 14, "E", "Defense", "Use in words", 1 });
+    playerDeck.deck.push_back(playerDeck.CreateCard("S", "Attack",  1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("A", "Attack",  1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("T", "Attack",  1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("R", "Attack",  1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("I", "Attack",  1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("K", "Attack",  1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("E", "Attack",  1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("S", "Defense", 1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("A", "Defense", 1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("T", "Defense", 1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("R", "Defense", 1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("I", "Defense", 1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("K", "Defense", 1));
+    playerDeck.deck.push_back(playerDeck.CreateCard("E", "Defense", 1));
     playerDeck.Shuffle();
 
 
     GameState gameState = GameState::BATTLE;
     std::unique_ptr<Battle> battle = nullptr;
     std::unique_ptr<RewardScreen> rewardScreen = nullptr;
-    // Move all switch-case scoped objects outside the loop to avoid E0546
+    
     DefeatScreen defeatScreen;
     int floorNumber = 0;
 
@@ -54,7 +57,7 @@ int main() {
             if (!battle) {
 
                 enemy= enemy.GenerateRandomEnemy(floorNumber);
-                std::cout << "Generated: " << enemy.name;
+                
                 enemy.PlanTurn(enemy);
                 floorNumber++;
 
@@ -77,7 +80,7 @@ int main() {
             
 
         case GameState::REWARD:
-            if (!rewardScreen)   rewardScreen = std::make_unique<RewardScreen>();
+            if (!rewardScreen)   rewardScreen = std::make_unique<RewardScreen>(playerDeck);
 
             rewardScreen->Update();
             rewardScreen->Draw();
@@ -97,7 +100,7 @@ int main() {
                     gameState = GameState::BATTLE;
                     rewardScreen.reset();
                 }
-
+            
             break;
 
         case GameState::DEFEAT:

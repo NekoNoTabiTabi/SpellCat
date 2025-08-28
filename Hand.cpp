@@ -27,8 +27,8 @@ void Hand::DrawHand(int x, int y)
 {
     
     int cardSpacing = 10;
-    int cardWidth = 80;
-    int cardHeight = 120;
+    int cardWidth = SCREEN_WIDTH*0.08f;
+    int cardHeight = SCREEN_HEIGHT*0.20f;
 
     for (size_t i = 0; i < hand.size(); ++i)
     {
